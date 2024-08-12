@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    <h1>Holiday Assignments</h1>
+    <div class="assignments-container">
+        {% for grade in grades %}
+            <section class="grade-section">
+                <h2>FORM {{ grade }}</h2>
+                <ul class="assignment-list">
+                    {% for assignment in assignments %}
+                        {% if assignment.grade == grade %}
+                            <li>
+                                <span>{{ assignment.title }}</span>
+                                <span>Uploaded: {{ assignment.upload_date|date:"F d, Y" }}</span>
+                                <a href="{{ assignment.file.url }}" download class="button">Download</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endfor %}
+    </div>
+{% endblock %}

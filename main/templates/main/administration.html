@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    <h1>Administration</h1>
+    <div class="admin-grid">
+        {% for admin in administrators %}
+            <div class="admin-card">
+                <img src="{{ admin.photo.url }}" alt="{{ admin.name }}">
+                <h2>{{ admin.name }}</h2>
+                <p>{{ admin.title }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

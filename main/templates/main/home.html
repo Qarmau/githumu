@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    <h1>Welcome to Githumu High School</h1>
+    <section id="upcoming-events">
+        <h2>Upcoming Events</h2>
+        <ul>
+            {% for event in events %}<li>{{ event.title }} - {{ event.date }}</li>{% endfor %}
+        </ul>
+    </section>
+    <section id="news">
+        <h2>News</h2>
+        <ul>
+            {% for item in news %}<li>{{ item.title }} - {{ item.date }}</li>{% endfor %}
+        </ul>
+    </section>
+    <section id="calendar">
+        <h2>Calendar of Events</h2>
+        <div id="calendar-container"></div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar-container');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: {{ events_json|safe }},
+            eventClick: function(info) {
+                alert('Event: ' + info.event.title + '\nDescription: ' + (info.event.extendedProps.description || 'No description available'));
+            }
+        });
+        calendar.render();
+    });
+    </script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+    <h1>{{ job.title }}</h1>
+    <p>Specification: {{ job.specification }}</p>
+    <p>Minimum Requirements: {{ job.minimum_requirements }}</p>
+    
+    <p>Deadline: {{ job.deadline|date:"F j, Y" }}</p>
+
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if is_active %}
+        <h2>Apply for this job</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Application</button>
+        </form>
+    {% else %}
+        <p>Sorry, the application deadline for this job has passed.</p>
+    {% endif %}
+{% endblock %}

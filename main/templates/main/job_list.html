@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+    <h1>Job Postings</h1>
+    {% for job in jobs %}
+        <div>
+            <h2><a href="{% url 'job_detail' job.id %}">{{ job.title }}</a></h2>
+            <p>Deadline: {{ job.deadline }}</p>
+            {% if job.is_active %}
+                <p>Status: Open</p>
+            {% else %}
+                <p>Status: Closed</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

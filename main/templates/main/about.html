@@ -1,0 +1,109 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    <h1>About Githumu High School</h1>
+    {% for section in sections %}
+        <section id="{{ section.title|slugify }}">
+            <h2>{{ section.title }}</h2>
+            <div>{{ section.content|safe }}</div>
+        </section>
+    {% endfor %}
+    <section id="history">
+        <h2>History</h2>
+        <p>{{ about.history }}</p>
+    </section>
+    <section id="population">
+        <h2>Population</h2>
+        <p>Current student population: {{ about.population }}</p>
+    </section>
+    <section id="motto">
+        <h2>School Motto</h2>
+        <p>{{ about.motto }}</p>
+    </section>
+    <section id="vision">
+        <h2>Vision</h2>
+        <p>{{ about.vision }}</p>
+    </section>
+    <section id="mission">
+        <h2>Mission</h2>
+        <p>{{ about.mission }}</p>
+    </section>
+    <section id="subjects">
+        <h2>Subjects Offered</h2>
+        <p>{{ about.subjects }}</p>
+    </section>
+    <section id="clubs">
+        <h2>Clubs and Societies</h2>
+        <p>{{ about.clubs }}</p>
+    </section>
+    <section id="contact">
+    <h2>Contact Information</h2>
+    <p>{{ about.contact_info }}</p>
+    
+    <h3>Send us an email</h3>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button">Send</button>
+    </form>
+</section>
+        <!--<h3>Send us an email</h3>
+        <form id="email-form">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" placeholder="Your Message" required></textarea>
+                            <button type="submit" class="button">Send</button>
+    </form>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+    (function() {
+        emailjs.init("pKi5DnpjrQxYpXhV8"); // Replace with your EmailJS user ID
+    })();
+
+    document.getElementById('email-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        emailjs.send("service_tm35mst", "template_yk0zk4e", {
+            to_email: "{{ about.email }}",
+            from_name: document.getElementById('name').value,
+            from_email: document.getElementById('email').value,
+            message: document.getElementById('message').value
+        }).then(
+            function(response) {
+                alert("Email sent successfully!");
+                document.getElementById('email-form').reset();
+            },
+            function(error) {
+                alert("Failed to send email. Please try again later.");
+            }
+        );
+    });
+</script>-->
+<!--<section id="map">
+    <h2>Our Location</h2>
+    <div id="google-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15957.606890781744!2d36.9141224!3d-0.8279865!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1828c7b463f3b663%3A0xfcad6a16953bfe2d!2sGithumu%20High%20School!5e0!3m2!1sen!2ske!4v1723396530541!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>-->
+<div class="map-placeholder">
+    <p>
+        <div class="google-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15957.606890781744!2d36.9141224!3d-0.8279865!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1828c7b463f3b663%3A0xfcad6a16953bfe2d!2sGithumu%20High%20School!5e0!3m2!1sen!2ske!4v1723298824220!5m2!1sen!2ske"
+                    width="600"
+                    height="450"
+                    style="border:0"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </p>
+</div>
+{% endblock %}

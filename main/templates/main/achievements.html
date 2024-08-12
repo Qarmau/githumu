@@ -1,0 +1,34 @@
+<!-- main/templates/main/achievements.html -->
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+    <h1>Achievements</h1>
+    <section id="university-admissions">
+        <h2>University Admission Rates</h2>
+        <canvas id="admissionChart"></canvas>
+    </section>
+    <section id="co-curricular-awards">
+        <h2>Co-Curricular Activities Awards</h2>
+        <div class="awards-grid">
+            {% for award in awards %}
+                <div class="award-card">
+                    <div class="award-photo-container">
+                        {% if award.photo %}
+                            <img src="{{ award.photo.url }}"
+                                 alt="{{ award.title }}"
+                                 class="award-photo">
+                        {% else %}
+                            <div class="award-photo-placeholder"></div>
+                        {% endif %}
+                    </div>
+                    <div class="award-info">
+                        <h3>{{ award.title }}</h3>
+                        <p>Year: {{ award.year }}</p>
+                        <p>{{ award.description }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!-- ... Chart.js script for university admission rates ... -->
+{% endblock %}

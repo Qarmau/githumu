@@ -1,0 +1,19 @@
+<!-- main/templates/main/teaching_staff.html -->
+{% extends 'main/base.html' %}
+{% block content %}
+    <h1>Teaching Staff</h1>
+    <div class="staff-container">
+        {% for member in staff %}
+            <div class="staff-card">
+                <img src="{{ member.photo.url }}"
+                     alt="{{ member.name }}"
+                     class="staff-photo">
+                <div class="staff-info">
+                    <h2>{{ member.name }}</h2>
+                    {% if member.title %}<p class="staff-title">{{ member.title }}</p>{% endif %}
+                    <p class="staff-subjects">{{ member.subject1 }} / {{ member.subject2 }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
